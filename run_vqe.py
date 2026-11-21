@@ -121,7 +121,7 @@ for d in dists:
         "err_HF_mHa": (e_hf - e_fci) * 1000,
         "err_VQE_UCCSD_mHa": (e_u - e_fci) * 1000,
         "err_VQE_RealAmp_mHa": (e_r - e_fci) * 1000,
-        "E_corr_mHa": (e_hf - e_fci) * 1000,
+        "E_corr_mHa_FCI_menos_HF": (e_fci - e_hf) * 1000,
         "evals_uccsd": n_u,
         "evals_ra": n_r,
         "t_uccsd_s": t_u,

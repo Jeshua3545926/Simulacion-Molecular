@@ -195,7 +195,10 @@ export default function App() {
                   return (
                     <tr key={m.clave}>
                       <td>
-                        <span className="punto" style={{ background: m.color }} />
+                        <span
+                          className="punto"
+                          style={{ background: m.color }}
+                        />
                         {m.nombre}
                       </td>
                       <td className="num">{fmt(m.err)}</td>
@@ -231,7 +234,11 @@ export default function App() {
             {NOMBRE[mol]} · {fila.distancia_A.toFixed(2)} Å
           </span>
         </div>
-        <div className="filtros-series" role="group" aria-label="Métodos visibles">
+        <div
+          className="filtros-series"
+          role="group"
+          aria-label="Métodos visibles"
+        >
           {SERIES.map((serieItem) => (
             <button
               key={serieItem.clave}
@@ -261,338 +268,340 @@ export default function App() {
       </section>
 
       <div className="graficas">
-      <section className="panel grafica grafica-energia">
-        <div className="grafica-cabecera">
-          <div>
-            <h2>Energía del estado fundamental</h2>
-            <p className="nota">La energía más baja indica un estado más estable.</p>
+        <section className="panel grafica grafica-energia">
+          <div className="grafica-cabecera">
+            <div>
+              <h2>Energía del estado fundamental</h2>
+              <p className="nota">
+                La energía más baja indica un estado más estable.
+              </p>
+            </div>
+            <span className="unidad-grafica">Ha</span>
           </div>
-          <span className="unidad-grafica">Ha</span>
-        </div>
-        <div className="graf">
-          <ResponsiveContainer width="100%" height={280}>
-            <LineChart
-              data={serie}
-              margin={{ top: 8, right: 16, bottom: 20, left: 8 }}
-              onClick={seleccionarDistanciaEnGrafica}
-              accessibilityLayer
-            >
-              <CartesianGrid stroke="var(--rejilla)" vertical={false} />
-              <XAxis
-                dataKey="d"
-                type="number"
-                domain={["dataMin", "dataMax"]}
-                tickFormatter={(v) => v.toFixed(1)}
-                tickLine={false}
-                axisLine={false}
-                tick={{ fill: "var(--texto2)", fontSize: 12 }}
-                label={{
-                  value: "Distancia interatómica (Å)",
-                  position: "insideBottom",
-                  offset: -10,
-                  fill: "var(--texto2)",
-                  fontSize: 12,
-                }}
-              />
-              <YAxis
-                domain={["auto", "auto"]}
-                tickFormatter={(v) => v.toFixed(2)}
-                tickLine={false}
-                axisLine={false}
-                tick={{ fill: "var(--texto2)", fontSize: 12 }}
-                width={64}
-              />
-              <Tooltip
-                formatter={(v) => `${Number(v).toFixed(5)} Ha`}
-                labelFormatter={(l) => `Distancia: ${Number(l).toFixed(2)} Å`}
-                cursor={{ stroke: "var(--acento)", strokeDasharray: "4 4" }}
-                contentStyle={{
-                  background: "var(--panel)",
-                  border: "1px solid var(--borde)",
-                  borderRadius: 10,
-                  boxShadow: "0 8px 24px rgba(15, 23, 42, 0.12)",
-                  padding: "10px 12px",
-                }}
-              />
-              <ReferenceLine
-                x={fila.distancia_A}
-                stroke="var(--acento)"
-                strokeDasharray="4 3"
-              />
-              <Line
-                name="FCI (exacto)"
-                dataKey="fci"
-                stroke={COL.fci}
-                strokeWidth={2}
-                dot={false}
-                activeDot={{ r: 5, strokeWidth: 2 }}
-                hide={!seriesVisibles.fci}
-                isAnimationActive={false}
-              />
-              <Line
-                name="Hartree-Fock"
-                dataKey="hf"
-                stroke={COL.hf}
-                strokeDasharray="6 4"
-                dot={false}
-                activeDot={{ r: 5, strokeWidth: 2 }}
-                hide={!seriesVisibles.hf}
-                isAnimationActive={false}
-              />
-              <Line
-                name="VQE UCCSD"
-                dataKey="ucc"
-                stroke={COL.ucc}
-                strokeWidth={0}
-                dot={{ r: 3 }}
-                activeDot={{ r: 6, strokeWidth: 2 }}
-                hide={!seriesVisibles.ucc}
-                isAnimationActive={false}
-              />
-              <Line
-                name="VQE RealAmplitudes"
-                dataKey="ra"
-                stroke={COL.ra}
-                strokeWidth={0}
-                dot={{ r: 3, strokeWidth: 2, fill: "none" }}
-                activeDot={{ r: 6, strokeWidth: 2 }}
-                hide={!seriesVisibles.ra}
-                isAnimationActive={false}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-      </section>
+          <div className="graf">
+            <ResponsiveContainer width="100%" height={280}>
+              <LineChart
+                data={serie}
+                margin={{ top: 8, right: 16, bottom: 20, left: 8 }}
+                onClick={seleccionarDistanciaEnGrafica}
+                accessibilityLayer
+              >
+                <CartesianGrid stroke="var(--rejilla)" vertical={false} />
+                <XAxis
+                  dataKey="d"
+                  type="number"
+                  domain={["dataMin", "dataMax"]}
+                  tickFormatter={(v) => v.toFixed(1)}
+                  tickLine={false}
+                  axisLine={false}
+                  tick={{ fill: "var(--texto2)", fontSize: 12 }}
+                  label={{
+                    value: "Distancia interatómica (Å)",
+                    position: "insideBottom",
+                    offset: -10,
+                    fill: "var(--texto2)",
+                    fontSize: 12,
+                  }}
+                />
+                <YAxis
+                  domain={["auto", "auto"]}
+                  tickFormatter={(v) => v.toFixed(2)}
+                  tickLine={false}
+                  axisLine={false}
+                  tick={{ fill: "var(--texto2)", fontSize: 12 }}
+                  width={64}
+                />
+                <Tooltip
+                  formatter={(v) => `${Number(v).toFixed(5)} Ha`}
+                  labelFormatter={(l) => `Distancia: ${Number(l).toFixed(2)} Å`}
+                  cursor={{ stroke: "var(--acento)", strokeDasharray: "4 4" }}
+                  contentStyle={{
+                    background: "var(--panel)",
+                    border: "1px solid var(--borde)",
+                    borderRadius: 10,
+                    boxShadow: "0 8px 24px rgba(15, 23, 42, 0.12)",
+                    padding: "10px 12px",
+                  }}
+                />
+                <ReferenceLine
+                  x={fila.distancia_A}
+                  stroke="var(--acento)"
+                  strokeDasharray="4 3"
+                />
+                <Line
+                  name="FCI (exacto)"
+                  dataKey="fci"
+                  stroke={COL.fci}
+                  strokeWidth={2}
+                  dot={false}
+                  activeDot={{ r: 5, strokeWidth: 2 }}
+                  hide={!seriesVisibles.fci}
+                  isAnimationActive={false}
+                />
+                <Line
+                  name="Hartree-Fock"
+                  dataKey="hf"
+                  stroke={COL.hf}
+                  strokeDasharray="6 4"
+                  dot={false}
+                  activeDot={{ r: 5, strokeWidth: 2 }}
+                  hide={!seriesVisibles.hf}
+                  isAnimationActive={false}
+                />
+                <Line
+                  name="VQE UCCSD"
+                  dataKey="ucc"
+                  stroke={COL.ucc}
+                  strokeWidth={0}
+                  dot={{ r: 3 }}
+                  activeDot={{ r: 6, strokeWidth: 2 }}
+                  hide={!seriesVisibles.ucc}
+                  isAnimationActive={false}
+                />
+                <Line
+                  name="VQE RealAmplitudes"
+                  dataKey="ra"
+                  stroke={COL.ra}
+                  strokeWidth={0}
+                  dot={{ r: 3, strokeWidth: 2, fill: "none" }}
+                  activeDot={{ r: 6, strokeWidth: 2 }}
+                  hide={!seriesVisibles.ra}
+                  isAnimationActive={false}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </section>
 
-      <section className="panel grafica grafica-error">
-        <div className="grafica-cabecera">
-          <div>
-            <h2>Error respecto a FCI</h2>
-            <p className="nota">
-              Escala logarítmica · por debajo de la línea se alcanza la
-              precisión química.
-            </p>
+        <section className="panel grafica grafica-error">
+          <div className="grafica-cabecera">
+            <div>
+              <h2>Error respecto a FCI</h2>
+              <p className="nota">
+                Escala logarítmica · por debajo de la línea se alcanza la
+                precisión química.
+              </p>
+            </div>
+            <span className="unidad-grafica">mHa</span>
           </div>
-          <span className="unidad-grafica">mHa</span>
-        </div>
-        <div className="graf">
-          <ResponsiveContainer width="100%" height={280}>
-            <LineChart
-              data={serie}
-              margin={{ top: 8, right: 16, bottom: 20, left: 8 }}
-              onClick={seleccionarDistanciaEnGrafica}
-              accessibilityLayer
-            >
-              <CartesianGrid stroke="var(--rejilla)" vertical={false} />
-              <XAxis
-                dataKey="d"
-                type="number"
-                domain={["dataMin", "dataMax"]}
-                tickFormatter={(v) => v.toFixed(1)}
-                tickLine={false}
-                axisLine={false}
-                tick={{ fill: "var(--texto2)", fontSize: 12 }}
-                label={{
-                  value: "Distancia interatómica (Å)",
-                  position: "insideBottom",
-                  offset: -10,
-                  fill: "var(--texto2)",
-                  fontSize: 12,
-                }}
-              />
-              <YAxis
-                scale="log"
-                domain={[PISO, 1000]}
-                allowDataOverflow
-                ticks={[1e-6, 1e-4, 1e-2, 1, 100]}
-                tickFormatter={(v) =>
-                  v < 0.01 ? v.toExponential(0) : String(v)
-                }
-                tickLine={false}
-                axisLine={false}
-                tick={{ fill: "var(--texto2)", fontSize: 12 }}
-                width={64}
-              />
-              <Tooltip
-                formatter={(v) =>
-                  v <= PISO * 1.01
-                    ? "≈ 0 (< 1e-6 mHa)"
-                    : `${Number(v).toFixed(4)} mHa`
-                }
-                labelFormatter={(l) => `Distancia: ${Number(l).toFixed(2)} Å`}
-                cursor={{ stroke: "var(--acento)", strokeDasharray: "4 4" }}
-                contentStyle={{
-                  background: "var(--panel)",
-                  border: "1px solid var(--borde)",
-                  borderRadius: 10,
-                  boxShadow: "0 8px 24px rgba(15, 23, 42, 0.12)",
-                  padding: "10px 12px",
-                }}
-              />
-              <ReferenceLine
-                y={UMBRAL}
-                stroke="#94a3b8"
-                strokeDasharray="3 3"
-                label={{
-                  value: "precisión química (1.6 mHa)",
-                  fill: "var(--texto2)",
-                  fontSize: 11,
-                  position: "insideTopLeft",
-                }}
-              />
-              <ReferenceLine
-                x={fila.distancia_A}
-                stroke="var(--acento)"
-                strokeDasharray="4 3"
-              />
-              <Line
-                name="Hartree-Fock"
-                dataKey="eHF"
-                stroke={COL.hf}
-                strokeDasharray="6 4"
-                dot={false}
-                activeDot={{ r: 5, strokeWidth: 2 }}
-                hide={!seriesVisibles.hf}
-                isAnimationActive={false}
-              />
-              <Line
-                name="VQE UCCSD"
-                dataKey="eUCC"
-                stroke={COL.ucc}
-                dot={{ r: 3 }}
-                activeDot={{ r: 6, strokeWidth: 2 }}
-                hide={!seriesVisibles.ucc}
-                isAnimationActive={false}
-              />
-              <Line
-                name="VQE RealAmplitudes"
-                dataKey="eRA"
-                stroke={COL.ra}
-                dot={{ r: 3 }}
-                activeDot={{ r: 6, strokeWidth: 2 }}
-                hide={!seriesVisibles.ra}
-                isAnimationActive={false}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-        <p className="nota">
-          Los errores menores a 10⁻⁶ mHa se dibujan en 10⁻⁶ para poder
-          mostrarlos en escala logarítmica.
-        </p>
-      </section>
+          <div className="graf">
+            <ResponsiveContainer width="100%" height={280}>
+              <LineChart
+                data={serie}
+                margin={{ top: 8, right: 16, bottom: 20, left: 8 }}
+                onClick={seleccionarDistanciaEnGrafica}
+                accessibilityLayer
+              >
+                <CartesianGrid stroke="var(--rejilla)" vertical={false} />
+                <XAxis
+                  dataKey="d"
+                  type="number"
+                  domain={["dataMin", "dataMax"]}
+                  tickFormatter={(v) => v.toFixed(1)}
+                  tickLine={false}
+                  axisLine={false}
+                  tick={{ fill: "var(--texto2)", fontSize: 12 }}
+                  label={{
+                    value: "Distancia interatómica (Å)",
+                    position: "insideBottom",
+                    offset: -10,
+                    fill: "var(--texto2)",
+                    fontSize: 12,
+                  }}
+                />
+                <YAxis
+                  scale="log"
+                  domain={[PISO, 1000]}
+                  allowDataOverflow
+                  ticks={[1e-6, 1e-4, 1e-2, 1, 100]}
+                  tickFormatter={(v) =>
+                    v < 0.01 ? v.toExponential(0) : String(v)
+                  }
+                  tickLine={false}
+                  axisLine={false}
+                  tick={{ fill: "var(--texto2)", fontSize: 12 }}
+                  width={64}
+                />
+                <Tooltip
+                  formatter={(v) =>
+                    v <= PISO * 1.01
+                      ? "≈ 0 (< 1e-6 mHa)"
+                      : `${Number(v).toFixed(4)} mHa`
+                  }
+                  labelFormatter={(l) => `Distancia: ${Number(l).toFixed(2)} Å`}
+                  cursor={{ stroke: "var(--acento)", strokeDasharray: "4 4" }}
+                  contentStyle={{
+                    background: "var(--panel)",
+                    border: "1px solid var(--borde)",
+                    borderRadius: 10,
+                    boxShadow: "0 8px 24px rgba(15, 23, 42, 0.12)",
+                    padding: "10px 12px",
+                  }}
+                />
+                <ReferenceLine
+                  y={UMBRAL}
+                  stroke="#94a3b8"
+                  strokeDasharray="3 3"
+                  label={{
+                    value: "precisión química (1.6 mHa)",
+                    fill: "var(--texto2)",
+                    fontSize: 11,
+                    position: "insideTopLeft",
+                  }}
+                />
+                <ReferenceLine
+                  x={fila.distancia_A}
+                  stroke="var(--acento)"
+                  strokeDasharray="4 3"
+                />
+                <Line
+                  name="Hartree-Fock"
+                  dataKey="eHF"
+                  stroke={COL.hf}
+                  strokeDasharray="6 4"
+                  dot={false}
+                  activeDot={{ r: 5, strokeWidth: 2 }}
+                  hide={!seriesVisibles.hf}
+                  isAnimationActive={false}
+                />
+                <Line
+                  name="VQE UCCSD"
+                  dataKey="eUCC"
+                  stroke={COL.ucc}
+                  dot={{ r: 3 }}
+                  activeDot={{ r: 6, strokeWidth: 2 }}
+                  hide={!seriesVisibles.ucc}
+                  isAnimationActive={false}
+                />
+                <Line
+                  name="VQE RealAmplitudes"
+                  dataKey="eRA"
+                  stroke={COL.ra}
+                  dot={{ r: 3 }}
+                  activeDot={{ r: 6, strokeWidth: 2 }}
+                  hide={!seriesVisibles.ra}
+                  isAnimationActive={false}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+          <p className="nota">
+            Los errores menores a 10⁻⁶ mHa se dibujan en 10⁻⁶ para poder
+            mostrarlos en escala logarítmica.
+          </p>
+        </section>
 
-      <section className="panel grafica grafica-costo">
-        <div className="grafica-cabecera">
-          <div>
-            <h2>Costo de optimización</h2>
-            <p className="nota">
-              Evaluaciones de energía por distancia interatómica.
-            </p>
+        <section className="panel grafica grafica-costo">
+          <div className="grafica-cabecera">
+            <div>
+              <h2>Costo de optimización</h2>
+              <p className="nota">
+                Evaluaciones de energía por distancia interatómica.
+              </p>
+            </div>
+            <span className="unidad-grafica">evaluaciones</span>
           </div>
-          <span className="unidad-grafica">evaluaciones</span>
-        </div>
-        <div className="graf">
-          <ResponsiveContainer width="100%" height={260}>
-            <LineChart
-              data={serie}
-              margin={{ top: 8, right: 16, bottom: 20, left: 8 }}
-              onClick={seleccionarDistanciaEnGrafica}
-              accessibilityLayer
-            >
-              <CartesianGrid stroke="var(--rejilla)" vertical={false} />
-              <XAxis
-                dataKey="d"
-                type="number"
-                domain={["dataMin", "dataMax"]}
-                tickFormatter={(v) => v.toFixed(1)}
-                tickLine={false}
-                axisLine={false}
-                tick={{ fill: "var(--texto2)", fontSize: 12 }}
-                label={{
-                  value: "Distancia interatómica (Å)",
-                  position: "insideBottom",
-                  offset: -10,
-                  fill: "var(--texto2)",
-                  fontSize: 12,
-                }}
-              />
-              <YAxis
-                scale="log"
-                domain={[50, 5000]}
-                allowDataOverflow
-                ticks={[100, 300, 1000, 3000]}
-                tickLine={false}
-                axisLine={false}
-                tick={{ fill: "var(--texto2)", fontSize: 12 }}
-                width={64}
-              />
-              <Tooltip
-                formatter={(v) => Number(v).toLocaleString("es-MX")}
-                labelFormatter={(l) => `Distancia: ${Number(l).toFixed(2)} Å`}
-                cursor={{ stroke: "var(--acento)", strokeDasharray: "4 4" }}
-                contentStyle={{
-                  background: "var(--panel)",
-                  border: "1px solid var(--borde)",
-                  borderRadius: 10,
-                  boxShadow: "0 8px 24px rgba(15, 23, 42, 0.12)",
-                  padding: "10px 12px",
-                }}
-              />
-              <ReferenceLine
-                y={2000}
-                stroke={COL.ucc}
-                strokeDasharray="2 4"
-                label={{
-                  value: "límite UCCSD (2,000)",
-                  fill: "var(--texto2)",
-                  fontSize: 11,
-                  position: "insideBottomRight",
-                }}
-              />
-              <ReferenceLine
-                y={3000}
-                stroke={COL.ra}
-                strokeDasharray="2 4"
-                label={{
-                  value: "límite RealAmp. (3,000)",
-                  fill: "var(--texto2)",
-                  fontSize: 11,
-                  position: "insideTopRight",
-                }}
-              />
-              <ReferenceLine
-                x={fila.distancia_A}
-                stroke="var(--acento)"
-                strokeDasharray="4 3"
-              />
-              <Line
-                name="UCCSD"
-                dataKey="nUCC"
-                stroke={COL.ucc}
-                dot={{ r: 3 }}
-                activeDot={{ r: 6, strokeWidth: 2 }}
-                hide={!seriesVisibles.ucc}
-                isAnimationActive={false}
-              />
-              <Line
-                name="RealAmplitudes (mejor de 3 semillas)"
-                dataKey="nRA"
-                stroke={COL.ra}
-                dot={{ r: 3 }}
-                activeDot={{ r: 6, strokeWidth: 2 }}
-                hide={!seriesVisibles.ra}
-                isAnimationActive={false}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-        <p className="nota">
-          El límite fue de 2,000 evaluaciones para UCCSD y de 3,000 para
-          RealAmplitudes: los puntos que tocan esas líneas se detuvieron por el
-          límite, no porque el optimizador convergiera.
-        </p>
-      </section>
+          <div className="graf">
+            <ResponsiveContainer width="100%" height={260}>
+              <LineChart
+                data={serie}
+                margin={{ top: 8, right: 16, bottom: 20, left: 8 }}
+                onClick={seleccionarDistanciaEnGrafica}
+                accessibilityLayer
+              >
+                <CartesianGrid stroke="var(--rejilla)" vertical={false} />
+                <XAxis
+                  dataKey="d"
+                  type="number"
+                  domain={["dataMin", "dataMax"]}
+                  tickFormatter={(v) => v.toFixed(1)}
+                  tickLine={false}
+                  axisLine={false}
+                  tick={{ fill: "var(--texto2)", fontSize: 12 }}
+                  label={{
+                    value: "Distancia interatómica (Å)",
+                    position: "insideBottom",
+                    offset: -10,
+                    fill: "var(--texto2)",
+                    fontSize: 12,
+                  }}
+                />
+                <YAxis
+                  scale="log"
+                  domain={[50, 5000]}
+                  allowDataOverflow
+                  ticks={[100, 300, 1000, 3000]}
+                  tickLine={false}
+                  axisLine={false}
+                  tick={{ fill: "var(--texto2)", fontSize: 12 }}
+                  width={64}
+                />
+                <Tooltip
+                  formatter={(v) => Number(v).toLocaleString("es-MX")}
+                  labelFormatter={(l) => `Distancia: ${Number(l).toFixed(2)} Å`}
+                  cursor={{ stroke: "var(--acento)", strokeDasharray: "4 4" }}
+                  contentStyle={{
+                    background: "var(--panel)",
+                    border: "1px solid var(--borde)",
+                    borderRadius: 10,
+                    boxShadow: "0 8px 24px rgba(15, 23, 42, 0.12)",
+                    padding: "10px 12px",
+                  }}
+                />
+                <ReferenceLine
+                  y={2000}
+                  stroke={COL.ucc}
+                  strokeDasharray="2 4"
+                  label={{
+                    value: "límite UCCSD (2,000)",
+                    fill: "var(--texto2)",
+                    fontSize: 11,
+                    position: "insideBottomRight",
+                  }}
+                />
+                <ReferenceLine
+                  y={3000}
+                  stroke={COL.ra}
+                  strokeDasharray="2 4"
+                  label={{
+                    value: "límite RealAmp. (3,000)",
+                    fill: "var(--texto2)",
+                    fontSize: 11,
+                    position: "insideTopRight",
+                  }}
+                />
+                <ReferenceLine
+                  x={fila.distancia_A}
+                  stroke="var(--acento)"
+                  strokeDasharray="4 3"
+                />
+                <Line
+                  name="UCCSD"
+                  dataKey="nUCC"
+                  stroke={COL.ucc}
+                  dot={{ r: 3 }}
+                  activeDot={{ r: 6, strokeWidth: 2 }}
+                  hide={!seriesVisibles.ucc}
+                  isAnimationActive={false}
+                />
+                <Line
+                  name="RealAmplitudes (mejor de 3 semillas)"
+                  dataKey="nRA"
+                  stroke={COL.ra}
+                  dot={{ r: 3 }}
+                  activeDot={{ r: 6, strokeWidth: 2 }}
+                  hide={!seriesVisibles.ra}
+                  isAnimationActive={false}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+          <p className="nota">
+            El límite fue de 2,000 evaluaciones para UCCSD y de 3,000 para
+            RealAmplitudes: los puntos que tocan esas líneas se detuvieron por
+            el límite, no porque el optimizador convergiera.
+          </p>
+        </section>
       </div>
 
       <details className="panel regla">
@@ -603,8 +612,8 @@ export default function App() {
         <div className="contenido-regla">
           <ol>
             <li>
-              Calcular siempre Hartree-Fock y FCI como referencia. Si HF ya queda
-              dentro de 1.6 mHa, el VQE no aporta mejora significativa.
+              Calcular siempre Hartree-Fock y FCI como referencia. Si HF ya
+              queda dentro de 1.6 mHa, el VQE no aporta mejora significativa.
             </li>
             <li>
               Con correlación fuerte (HF fuera del umbral), usar un ansatz con
@@ -620,9 +629,10 @@ export default function App() {
             </li>
           </ol>
           <p className="nota">
-            Guía preliminar basada en dos moléculas pequeñas, simulación sin ruido
-            y base STO-3G (LiH con espacio activo de 2 electrones y 3 orbitales).
-            No demuestra ventaja cuántica ni aplica a sistemas grandes.
+            Guía preliminar basada en dos moléculas pequeñas, simulación sin
+            ruido y base STO-3G (LiH con espacio activo de 2 electrones y 3
+            orbitales). No demuestra ventaja cuántica ni aplica a sistemas
+            grandes.
           </p>
         </div>
       </details>
