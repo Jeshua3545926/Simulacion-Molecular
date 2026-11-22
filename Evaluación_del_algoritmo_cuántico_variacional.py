@@ -14,6 +14,9 @@ from scipy.optimize import minimize
 warnings.filterwarnings("ignore")
 
 
+
+
+
 if len(sys.argv) < 2:
     raise SystemExit("Uso: python run_vqe.py <H2|LiH>")
 

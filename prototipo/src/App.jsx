@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+﻿import { useMemo, useState } from "react";
 import {
   LineChart,
   Line,
@@ -9,6 +9,7 @@ import {
   ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
+import { LuLightbulb } from "react-icons/lu";
 import datos from "./datos.json";
 import Molecula3D from "./Molecula3D.jsx";
 
@@ -114,8 +115,17 @@ export default function App() {
     },
   ];
 
+  function navegarSugerencias(){
+   window.location.href = 'https://sugerencias-swart.vercel.app/'
+  }
+
   return (
     <main className="pagina">
+
+      <button className="sugerencias" onClick={navegarSugerencias} aria-label="Ir a sugerencias">
+        <LuLightbulb size={24} />
+        <span>Ideas</span>
+      </button>
       <header className="encabezado">
         <p className="etiqueta">
           Producto integrador · Química basada en datos
