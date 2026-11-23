@@ -1,3 +1,40 @@
+# =============================================================================
+# DEPENDENCIAS REQUERIDAS
+# =============================================================================
+# Instalar con:
+#   pip install qiskit qiskit-nature qiskit-aer pyscf numpy pandas scipy
+#
+#   qiskit          — SDK principal para construir y manipular circuitos cuánticos
+#   qiskit-nature   — Extensión de Qiskit para química cuántica, provee HartreeFock,
+#                     UCCSD, PySCFDriver, JordanWignerMapper y ActiveSpaceTransformer
+#   pyscf           — Motor de química clásica que calcula los integrales moleculares
+#                     que PySCFDriver necesita para construir el Hamiltoniano
+#   numpy           — Álgebra lineal (diagonalización, operaciones con vectores de estado)
+#   pandas          — Construcción y escritura del CSV de resultados
+#   scipy           — Optimizador COBYLA usado para minimizar la energía del VQE
+#
+# =============================================================================
+# CÓMO SE GENERA EL CSV DE RESULTADOS
+# =============================================================================
+# El script se ejecuta una molécula a la vez:
+#   python Evaluación_del_algoritmo_cuántico_variacional.py H2
+#   python Evaluación_del_algoritmo_cuántico_variacional.py LiH
+#
+# En cada ejecución, el script itera sobre un rango de distancias internucleares
+# (en Ångströms). Por cada distancia calcula cuatro energías del estado fundamental:
+#   - E_HF        : Hartree-Fock (método clásico de referencia)
+#   - E_FCI       : Full Configuration Interaction (valor exacto dentro de la base)
+#   - E_VQE_UCCSD : VQE con ansatz UCCSD (circuito inspirado en química)
+#   - E_VQE_RealAmp: VQE con ansatz RealAmplitudes (circuito genérico)
+#
+# Cada distancia agrega una fila a una lista; al final de cada iteración escribe
+# el acumulado en datos_H2.csv o datos_LiH.csv (sobreescribiéndolo), de modo que
+# si el script se interrumpe no se pierden los resultados anteriores.
+#
+# El archivo base_de_datos_vqe.csv es la unión de ambos CSV generada externamente
+# (por ejemplo con pandas.concat o simplemente copiando las filas).
+# =============================================================================
+
 import sys
 import time
 import warnings
@@ -6,7 +43,7 @@ import pandas as pd
 from qiskit.circuit.library import real_amplitudes
 from qiskit.quantum_info import Statevector
 from qiskit_nature.second_q.circuit.library import HartreeFock, UCCSD
-from qiskit_nature.second_q.drivers import PySCFDriverp
+from qiskit_nature.second_q.drivers import PySCFDriver
 from qiskit_nature.second_q.mappers import JordanWignerMapper
 from qiskit_nature.second_q.transformers import ActiveSpaceTransformer
 from scipy.optimize import minimize
@@ -18,7 +55,7 @@ warnings.filterwarnings("ignore")
 
 
 if len(sys.argv) < 2:
-    raise SystemExit("Uso: python run_vqe.py <H2|LiH>")
+    raise SystemExit("Uso: Evaluación_del_algoritmo_cuántico_variacional.py <H2|LiH>")
 
 mol = sys.argv[1]
 

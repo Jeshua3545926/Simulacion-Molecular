@@ -7,7 +7,7 @@ Una de las principales razones por las cuales decidimos que la explicación la d
 
 Aunque en los créditos finales del video se mencionan los nombres del equipo junto con una de sus tareas principales, por cuestiones de tiempo y espacio no fue posible incluir todo lo que realizaron. Por esta razón, elaboré este documento para detallar la contribución completa de cada integrante:
 
-- Jeshua Abiram Garza Romero [ parte experimental, parte del reporte y grabacion del video ]
+- Jeshua Abiram Garza Romero [ parte experimental, parte del reporte, investigacion y grabacion del video ]
 - Garcia Linda Oswaldo Ramon [ Parte del reporte ]
 - Josue Caleb Flores Gonzales [ Referencias del reporte y Parte de la presentacion con pptx]
 - Garcia Luna Diego Armando [ Edicion del video, parte experimental ]
